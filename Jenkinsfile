@@ -24,7 +24,7 @@ pipeline {
                sshagent([secret]){
                   sh """ssh -o StrictHostKeyChecking=no ${vmapps} << EOF 
                   cd ${dir}
-                  docker build -t ${images}:${tag} .
+                  docker build ${images}:${tag} .
                   exit
                   EOF"""
                 }
