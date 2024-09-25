@@ -23,6 +23,7 @@ pipeline {
                sshagent([secret]){
                   sh """ssh -o StrictHostKeyChecking=no ${vmapps} << EOF 
                   cd ${dir}
+                  nvm install 14
                   exec bash
                   npm install
                   echo "installation dependencies telah selesai"
