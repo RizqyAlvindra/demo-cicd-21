@@ -1,0 +1,7 @@
+services:
+  frontend:
+    container_name: dumbflix-fe
+    image: dumbflix-fe:latest
+    stdin_open: true
+    ports:
+     - 3000:3000 
