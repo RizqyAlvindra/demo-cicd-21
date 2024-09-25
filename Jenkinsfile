@@ -23,9 +23,7 @@ pipeline {
                sshagent([secret]){
                   sh """ssh -o StrictHostKeyChecking=no ${vmapps} << EOF 
                   cd ${dir}
-                  nvm install 14
-                  exec bash
-                  npm install
+                  ~/.nvm/versions/node/v14.21.3/bin/npm install
                   echo "installation dependencies telah selesai"
                   exit
                   EOF"""
@@ -37,8 +35,7 @@ pipeline {
                sshagent([secret]){
                   sh """ssh -o StrictHostKeyChecking=no ${vmapps} << EOF 
                   cd ${dir}
-                  exec bash
-                  pm2 start ecosystem.config.js
+                  ~/.nvm/versions/node/v14.21.3/bin/pm2 start ecosystem.config.js
                   echo "apllication already run"
                   exit
                   EOF"""
