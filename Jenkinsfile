@@ -1,4 +1,4 @@
-def secret = 'general'
+def secret = 'test'
 def vmapps = 'alvin@10.148.0.3'
 def dir    = '/home/alvin/dumbflix-frontend'
 def branch = 'master'
@@ -12,8 +12,7 @@ pipeline {
            steps {
                sshagent([secret]){
                   sh """ssh -o StrictHostKeyChecking=no ${vmapps} << EOF 
-                  cd ${dir}
-                  git pull origin ${branch}
+                  echo test
                   exit
                   EOF"""
                 }
@@ -23,8 +22,7 @@ pipeline {
            steps {
                sshagent([secret]){
                   sh """ssh -o StrictHostKeyChecking=no ${vmapps} << EOF 
-                  cd ${dir}
-                  docker build ${images}:${tag} .
+                  echo test
                   exit
                   EOF"""
                 }
@@ -34,8 +32,7 @@ pipeline {
            steps {
                sshagent([secret]){
                   sh """ssh -o StrictHostKeyChecking=no ${vmapps} << EOF 
-                  cd ${dir}
-                  docker compose up -d
+                  echo test
                   exit
                   EOF"""
                 }
