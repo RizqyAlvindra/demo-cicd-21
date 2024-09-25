@@ -23,6 +23,7 @@ pipeline {
                sshagent([secret]){
                   sh """ssh -o StrictHostKeyChecking=no ${vmapps} << EOF 
                   cd ${dir}
+                  exec bash
                   npm install
                   echo "installation dependencies telah selesai"
                   exit
@@ -35,6 +36,7 @@ pipeline {
                sshagent([secret]){
                   sh """ssh -o StrictHostKeyChecking=no ${vmapps} << EOF 
                   cd ${dir}
+                  exec bash
                   pm2 start ecosystem.config.js
                   echo "apllication already run"
                   exit
