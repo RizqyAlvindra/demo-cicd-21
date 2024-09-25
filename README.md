@@ -5,3 +5,5 @@ How to deploy dumbflix-frontend :
 
 testing cicd
 lol
+
+test
