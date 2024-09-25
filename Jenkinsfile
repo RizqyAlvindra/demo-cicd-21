@@ -2,6 +2,8 @@ def secret = 'general'
 def vmapps = 'alvin@10.148.0.3'
 def dir    = '/home/alvin/dumbflix-frontend'
 def branch = 'master'
+def images = 'dumbflix-fe'
+def tag    = 'latest'
 
 pipeline {
     agent any
@@ -18,12 +20,12 @@ pipeline {
                 }
             }
         }
-        stage ("build") {
+        stage ("docker build") {
            steps {
                sshagent([secret]){
                   sh """ssh -o StrictHostKeyChecking=no ${vmapps} << EOF 
                   cd ${dir}
-                  ~/.nvm/versions/node/v14.21.3/bin/npm install
+                  docker build -t ${images}:${tag}
                   echo "installation dependencies telah selesai"
                   exit
                   EOF"""
@@ -35,7 +37,7 @@ pipeline {
                sshagent([secret]){
                   sh """ssh -o StrictHostKeyChecking=no ${vmapps} << EOF 
                   cd ${dir}
-                  ~/.nvm/versions/node/v14.21.3/bin/pm2 start ecosystem.config.js
+                  docker compose up -d
                   echo "apllication already run"
                   exit
                   EOF"""
